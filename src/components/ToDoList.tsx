@@ -5,6 +5,7 @@ type Props = {
 
 const ToDoList = ({ setEdit }: Props) => {
   const { todos, deleteTodo } = useTodo();
+  console.log(todos)
   if (!todos) {
     return <div>No ToDoList</div>;
   }

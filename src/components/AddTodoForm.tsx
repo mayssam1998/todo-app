@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useTodo from "../hooks/useTodo";
 
 const AddTodoForm = ({ edit }: { edit?: ToDoProp }) => {
-  const { addTodo, editTodos } = useTodo();
+  const { addTodo, updateTodo } = useTodo();
   const [editTodo, setEditTodo] = useState<ToDoProp | undefined>();
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const AddTodoForm = ({ edit }: { edit?: ToDoProp }) => {
     const title = (e.target as any).todoTitle.value;
     const content = (e.target as any).todocontent.value;
     if (editTodo) {
-        editTodos({ title, content });
+        updateTodo({ title, content });
         console.log("tod edite submitted");
     } else {
       addTodo({ title, content });
@@ -36,6 +36,7 @@ const AddTodoForm = ({ edit }: { edit?: ToDoProp }) => {
             type="text"
             id="todoTitle"
             className="input"
+            required
           />
         </div>
         <div className="flex flex-col gap-2 mt-4">
@@ -45,6 +46,7 @@ const AddTodoForm = ({ edit }: { edit?: ToDoProp }) => {
             rows={5}
             id="todocontent"
             className="input"
+            required
           />
         </div>
         <button className="btn mt-4">Add To Do</button>
