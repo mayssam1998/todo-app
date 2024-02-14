@@ -8,13 +8,14 @@ type Props = {
 };
 
 const ToDoList = ({ setEdit }: Props) => {
-  const { deleteTodo } = useTodo();
+  const { deleteTodo, editTodos } = useTodo();
   const [open, setOpen] = useState(false);
   const [selectedTodo, setSelectedTodo] = useState<ToDoProp | null>(null);
   const todos = useAppSelector((st) => st.todos.data);
   if (!todos) {
     return <div>No ToDoList</div>;
   }
+  console.log(selectedTodo);
   return (
     <>
       <div key={JSON.stringify(todos)} className="flex flex-wrap gap-6">
@@ -49,8 +50,36 @@ const ToDoList = ({ setEdit }: Props) => {
         {selectedTodo && (
           <div className="relative rounded-lg flex flex-col justify-between flex-[3] min-w-80">
             <div className="p-3">
-              <input type="text" defaultValue={selectedTodo.title} className="text-xl font-semibold mb-4 outline-none w-full" />
-              <textarea rows={10} className="w-full outline-none h-fit" defaultValue={selectedTodo.content}></textarea>
+              <input
+                type="text"
+                onChange={(e) =>
+                  setSelectedTodo((prev) => {
+                    const updatedTodo = {
+                      title: e.target.value,
+                      content: selectedTodo.content,
+                    };
+                    editTodos(updatedTodo);
+                    return updatedTodo;
+                  })
+                }
+                defaultValue={selectedTodo.title}
+                className="text-xl font-semibold mb-4 outline-none w-full"
+              />
+              <textarea
+                onChange={(e) =>
+                  setSelectedTodo((prev) => {
+                    const updatedTodo = {
+                      title: selectedTodo.title,
+                      content: e.target.value,
+                    };
+                    editTodos(updatedTodo);
+                    return updatedTodo;
+                  })
+                }
+                rows={10}
+                className="w-full outline-none h-fit"
+                defaultValue={selectedTodo.content}
+              ></textarea>
             </div>
             <div className="borde-t-2 p-3 box-border bg-gray-100 sticky bottom-0 w-full flex justify-between">
               <div
