@@ -13,8 +13,7 @@ const AddTodoForm = ({ edit }: { edit?: ToDoProp }) => {
     const title = (e.target as any).todoTitle.value;
     const content = (e.target as any).todocontent.value;
     if (editTodo) {
-        editTodos({ title, content });
-        console.log("tod edite submitted");
+      editTodos({ title, content });
     } else {
       addTodo({ title, content });
     }
@@ -26,6 +25,7 @@ const AddTodoForm = ({ edit }: { edit?: ToDoProp }) => {
   return (
     <>
       <form
+        key={JSON.stringify(edit)}
         onSubmit={handleSubmit}
         className="border rounded-lg shadow p-3 my-4"
       >

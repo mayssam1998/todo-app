@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
+import { setTodos } from "../slices/todoSlice";
+import { useAppDispatch } from "../app/hooks";
 
 const useTodo = () => {
-  const [todos, settodos] = useState<ToDoProp[] | undefined | null>();
-  const prevTodos = localStorage.getItem("todolist");
-  
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
+    const prevTodos = localStorage.getItem("todolist");
     if (prevTodos) {
-      settodos(JSON.parse(prevTodos));
+      dispatch(setTodos(JSON.parse(prevTodos)));
     }
   }, []);
 
@@ -18,8 +20,8 @@ const useTodo = () => {
     }
     const prev = JSON.parse(prevTodos) as ToDoProp[];
     prev.push(todo);
+    dispatch(setTodos(prev));
     localStorage.setItem("todolist", JSON.stringify(prev));
-    settodos(prev);
     alert("To do added sucessfully");
   };
 
@@ -30,7 +32,7 @@ const useTodo = () => {
 
     const filter = prevTodos.filter((todo) => todo.title !== todoprop.title);
     localStorage.setItem("todolist", JSON.stringify(filter));
-    settodos(filter);
+    dispatch(setTodos(filter));
     alert("Todo is deleted sucessfully");
   };
 
@@ -42,10 +44,10 @@ const useTodo = () => {
     const filter = prevTodos.filter((todo) => todo.title !== todoprop.title);
     filter.push(todoprop);
     localStorage.setItem("todolist", JSON.stringify(filter));
-    settodos(filter);
+    dispatch(setTodos(filter));
   };
 
-  return { todos, addTodo, deleteTodo, editTodos };
+  return {  addTodo, deleteTodo, editTodos };
 };
 
 export default useTodo;
