@@ -33,14 +33,14 @@ const ToDoList = ({ setEdit }: Props) => {
                   <p className="text-xl font-semibold mb-4">{todo.title}</p>
                   <p className=" line-clamp-6">{todo.content}</p>
                 </div>
-                <div className="btns flex items-center gap-4 absolute right-3">
+                {/* <div className="btns flex items-center gap-4 absolute right-3">
                   <div className="btn" onClick={() => setEdit && setEdit(todo)}>
                     <PenIcon />
                   </div>
                   <div className="btn danger" onClick={() => deleteTodo(todo)}>
                     <Trash2 />
                   </div>
-                </div>
+                </div> */}
               </div>
             </React.Fragment>
           );
@@ -69,7 +69,7 @@ const ToDoList = ({ setEdit }: Props) => {
                 onChange={(e) =>
                   setSelectedTodo((prev) => {
                     const updatedTodo = {
-                      title: selectedTodo.title,
+                      title: prev?.title||"",
                       content: e.target.value,
                     };
                     editTodos(updatedTodo);
