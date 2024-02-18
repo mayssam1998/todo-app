@@ -10,8 +10,11 @@
   font-family: "Poppins", sans-serif;
 }
 :root {
-  --primary-color: blue;
-  --secondary-color: skyblue;
+  --primary-color: #eec269;
+  --foreground: #202124;
+  --background: white;
+  --dark-foreground: #e8eaed;
+  --dark-background: #202124;
   --dark: black;
   --light: white;
 }
@@ -26,6 +29,9 @@
     #f9f871
   );
   color: white;
+}
+.theme{
+  @apply dark:bg-background-dark bg-background dark:text-foreground-dark text-foreground
 }
 .btn {
   @apply rounded px-4 py-1 border-2 border-primary hover:bg-primary hover:text-light transition-all duration-150;

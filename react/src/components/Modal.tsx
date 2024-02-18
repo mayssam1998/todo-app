@@ -20,9 +20,9 @@ const Modal = (props: ModalProps) => {
       </div>
       <div
         onClick={closeModel}
-        className="absolute w-full h-full top-0 left-0 bg-gray-600/50 cursor-pointer"
+        className="absolute w-full h-full top-0 left-0 bg-gray-600/50 dark:bg-brown-overlay cursor-pointer"
       ></div>
-      <div className="border z-10 m-2 bg-light shadow-xl rounded-lg w-full md:w-[700px] mx-auto overflow-y-auto max-h-[600px]">
+      <div className="border dark:border-brown z-10 m-2 theme shadow-xl rounded-lg w-full md:w-[700px] mx-auto overflow-y-auto max-h-[600px]">
         {children}
       </div>
     </div>
