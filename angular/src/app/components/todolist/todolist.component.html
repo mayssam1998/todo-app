@@ -1,0 +1,10 @@
+<div class="flex flex-wrap gap-4">
+  @for (todo of todos; track todo.id) {
+  <div
+    [class.flex-[3]]="viewType == 'grid'"
+    [class.w-full]="viewType == 'list'"
+  >
+    <todo-card [todo]="todo"></todo-card>
+  </div>
+  } @empty { Empty list of users }
+</div>

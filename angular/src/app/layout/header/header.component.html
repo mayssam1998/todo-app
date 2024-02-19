@@ -1,0 +1,23 @@
+<header class="w-full border-b dark:border-brown mb-5 p-3">
+  <nav class="container mx-auto flex items-center justify-between">
+    <h1 class="font-bold text-3xl flex gap-2 items-center cursor-pointer">
+      <i class="fa-solid fa-check-double text-primary text-3xl"></i>
+      Keep Todos
+    </h1>
+    <header-search></header-search>
+
+    <div class="flex gap-2">
+      <div
+        (click)="handleViewType()"
+        class="rounded-full hover:bg-gray-200 hover:dark:bg-gray-600 h-10 w-10 transition-all duration-300 cursor-pointer hidden md:flex items-center justify-center"
+      >
+        @if(viewType=="grid"){
+        <i class="fa-solid fa-table-cells"></i>
+        }@else{
+        <i class="fa-solid fa-list"></i>
+        }
+      </div>
+      <header-darkmode></header-darkmode>
+    </div>
+  </nav>
+</header>
