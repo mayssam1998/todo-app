@@ -7,22 +7,21 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [SearchComponent, DarkmodeComponent,NgIf],
+  imports: [SearchComponent, DarkmodeComponent, NgIf],
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-  todoService = inject(TodosService);
   viewType: View = 'grid';
-  constructor() {
+  constructor(private todoService: TodosService) {
     this.viewType = this.todoService.getViewType();
   }
 
   handleViewType = () => {
-    if (this.todoService.getViewType() == 'grid') {
+    console.log(this.viewType);
+    if (this.viewType == 'grid') {
       this.todoService.setViewType('list');
     } else {
       this.todoService.setViewType('grid');
     }
-    console.log(this.todoService.getViewType());
   };
 }

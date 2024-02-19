@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { LocalStorageService } from './localstorage.service';
 import { generateId } from '../../utils/helper';
 
@@ -15,22 +15,24 @@ export type TodoProp = {
 
 export type View = 'list' | 'grid';
 
+export const todos = signal<TodosProps[]>([]);
+
 @Injectable({
   providedIn: 'root',
 })
 export class TodosService {
   todos: TodosProps[] = [];
   viewType: View = 'list';
-  localStorage = inject(LocalStorageService);
 
-  constructor() {
+  constructor(private localStorage: LocalStorageService) {
     this.loadTodos();
   }
 
   loadTodos() {
-    const todosJson = this.localStorage.getItem('todos');
-    const prevTodos = JSON.parse(todosJson || '[]');
+    const jsonString = this.localStorage.getItem('todos') || '[]';
+    const prevTodos = JSON.parse(jsonString || '[]');
     this.todos = prevTodos;
+    todos.set(prevTodos);
   }
 
   getTodos() {
@@ -41,13 +43,15 @@ export class TodosService {
     return this.viewType;
   }
 
-  setTodos(todos: TodosProps[]) {
-    this.todos = todos;
-    localStorage.setItem('todos', JSON.stringify(todos));
+  setTodos(Todos: TodosProps[]) {
+    this.todos = Todos;
+    todos.update(() => Todos);
+    this.localStorage.setItem('todos', JSON.stringify(Todos));
   }
 
   setViewType(type: View) {
     this.viewType = type;
+    console.log(this.viewType, type);
   }
 
   addTodo(todo: TodoProp) {

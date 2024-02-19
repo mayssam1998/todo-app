@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { TodosProps, TodosService, View } from '../../services/todos.service';
-import { TodoCardComponent } from '../todo-card/todo-card.component';
 import { NgFor } from '@angular/common';
+import { Component, effect } from '@angular/core';
+import { TodosProps, View, todos } from '../../services/todos.service';
+import { TodoCardComponent } from '../todo-card/todo-card.component';
 
 @Component({
   selector: 'app-todoslist',
@@ -10,12 +10,10 @@ import { NgFor } from '@angular/common';
   templateUrl: './todolist.component.html',
 })
 export class TodoslistComponent {
-  todosService = inject(TodosService);
-  todos: TodosProps[] = [];
-  viewType: View = 'grid';
+  todos: TodosProps[] = todos();
   constructor() {
-    this.todos = this.todosService.getTodos();
-    this.viewType = this.todosService.getViewType();
+    console.log(todos);
   }
-  
+
+  viewType: View = 'list';
 }
