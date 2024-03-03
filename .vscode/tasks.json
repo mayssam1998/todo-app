@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "serve:ssr:todo-app",
+      "path": "angular",
+      "problemMatcher": [],
+      "label": "serve angular build",
+      "detail": "node dist/todo-app/server/server.mjs"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "angular",
+      "problemMatcher": [],
+      "label": "run angular development",
+      "detail": "ng serve"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "react",
+      "problemMatcher": [],
+      "label": "run angular development",
+      "detail": "vite"
+    }
+  ]
+}

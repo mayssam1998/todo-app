@@ -8,12 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DarkmodeComponent implements OnInit {
   darkmode = true;
+
   ngOnInit(): void {
     this.getCurrentTheme();
   }
 
   getCurrentTheme() {
-    if (window !== undefined) {
+    // Check if window is defined (for browser environment)
+    if (typeof window !== 'undefined') {
       this.darkmode =
         window &&
         window.matchMedia('(prefers-color-scheme: dark)').matches &&
@@ -33,15 +35,16 @@ export class DarkmodeComponent implements OnInit {
       console.log('Light mode is preferred');
     }
   }
+
   handleDarkMode() {
     if (this.darkmode) {
       document.documentElement.classList.remove('dark');
       localStorage.removeItem('theme');
       this.darkmode = false;
-      return;
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      this.darkmode = true;
     }
-    document.documentElement.classList.add('dark');
-    localStorage.setItem('theme', 'dark');
-    this.darkmode = true;
   }
 }
