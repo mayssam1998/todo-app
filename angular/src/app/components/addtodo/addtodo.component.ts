@@ -18,7 +18,6 @@ export class AddtodoComponent {
   @ViewChild('contentInput', { static: false }) contentInput!: ElementRef;
 
   onFocus(): void {
-    console.log('worki');
     this.isOpen = true;
   }
 

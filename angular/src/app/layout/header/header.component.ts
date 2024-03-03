@@ -13,11 +13,12 @@ import { NgIf } from '@angular/common';
 export class HeaderComponent {
   viewType: View = 'grid';
   constructor(private todoService: TodosService) {
-    this.viewType = this.todoService.getViewType();
+    this.todoService.viewType.subscribe((type) => {
+      this.viewType = type;
+    });
   }
 
   handleViewType = () => {
-    console.log(this.viewType);
     if (this.viewType == 'grid') {
       this.todoService.setViewType('list');
     } else {
