@@ -2,6 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { LocalStorageService } from './localstorage.service';
 import { generateId } from '../../utils/helper';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 export type TodosProps = {
   id: string;
@@ -18,6 +19,19 @@ export type View = 'list' | 'grid';
 
 export const todos = signal<TodosProps[]>([]);
 
+export type todosResponse = {
+  todos: fetchedTodo[];
+  skip: number;
+  total: number;
+  limit: number;
+};
+
+export type fetchedTodo = {
+  completed: boolean;
+  id: number;
+  todo: string;
+  userId: number;
+};
 @Injectable({
   providedIn: 'root',
 })
@@ -28,14 +42,28 @@ export class TodosService {
   private viewSubject = new BehaviorSubject<View>('grid');
   viewType: Observable<View> = this.viewSubject.asObservable();
 
-  constructor(private localStorage: LocalStorageService) {
+  constructor(
+    private localStorage: LocalStorageService,
+    private http: HttpClient
+  ) {
     this.loadTodos();
   }
 
+  fetchTodos(): Observable<todosResponse> {
+    return this.http.get<todosResponse>('https://dummyjson.com/todos');
+  }
+
   loadTodos() {
-    const jsonString = this.localStorage.getItem('todos') || '[]';
-    const prevTodos = JSON.parse(jsonString);
-    this.todoSubject.next(prevTodos);
+    this.fetchTodos().subscribe((data) => {
+      const todos: TodosProps[] = data.todos.map((todo) => {
+        return {
+          content: todo.todo,
+          title: todo.id.toString(),
+          id: todo.id.toString(),
+        };
+      });
+      this.todoSubject.next(todos);
+    });
   }
 
   getTodos() {

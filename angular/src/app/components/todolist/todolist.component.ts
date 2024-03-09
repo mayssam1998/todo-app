@@ -32,8 +32,10 @@ export class TodoslistComponent {
       this.searchParams = params['search'];
       this.filteredTodos = this.todos.filter(
         (todo) =>
-          todo.title.toLowerCase().includes(this.searchParams.toLowerCase()) ||
-          todo.content.toLowerCase().includes(this.searchParams.toLowerCase())
+          todo.title
+            ?.toLowerCase()
+            .includes(this.searchParams?.toLowerCase()) ||
+          todo.content?.toLowerCase().includes(this.searchParams?.toLowerCase())
       );
     });
   }

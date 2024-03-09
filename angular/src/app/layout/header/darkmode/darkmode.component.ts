@@ -28,11 +28,9 @@ export class DarkmodeComponent implements OnInit {
     if (this.darkmode) {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
-      console.log('Dark mode is preferred');
     } else {
       document.documentElement.classList.remove('dark');
       localStorage.removeItem('theme');
-      console.log('Light mode is preferred');
     }
   }
 

@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -12,6 +12,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 export class SearchComponent {
   private router = inject(Router);
+
+  private route = inject(ActivatedRoute);
   @ViewChild('searchInput') searchInput!: ElementRef;
   searchQuery: string = '';
 
@@ -24,6 +26,13 @@ export class SearchComponent {
       .subscribe(() => {
         this.setQuery();
       });
+
+    this.route.queryParams.subscribe((params) => {
+      const searchParam = params?.['search'];
+      if (params?.['search'] !== this.searchQuery) {
+        this.searchQuery = params?.['search'];
+      }
+    });
   }
 
   setQuery() {
@@ -34,6 +43,5 @@ export class SearchComponent {
     } else {
       this.router.navigate(['/']);
     }
-    console.log('first');
   }
 }
