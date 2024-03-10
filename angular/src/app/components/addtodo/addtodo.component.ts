@@ -15,8 +15,6 @@ export class AddtodoComponent {
   content: string = '';
   todoService = inject(TodosService);
 
-  @ViewChild('contentInput', { static: false }) contentInput!: ElementRef;
-
   onFocus(): void {
     this.isOpen = true;
   }
@@ -29,9 +27,6 @@ export class AddtodoComponent {
         this.todoService.addTodo(todo);
       });
       (this.title = ''), (this.content = '');
-      if (this.contentInput) {
-        this.contentInput.nativeElement.innerText = '';
-      }
     }
   }
 
