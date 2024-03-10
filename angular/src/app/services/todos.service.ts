@@ -18,7 +18,12 @@ export type TodoProp = {
 export type View = 'list' | 'grid';
 
 export const todos = signal<TodosProps[]>([]);
-
+export type addTodosResponse = {
+  id: string;
+  todo: string;
+  completed: boolean;
+  userId: number;
+};
 export type todosResponse = {
   todos: fetchedTodo[];
   skip: number;
@@ -51,6 +56,14 @@ export class TodosService {
 
   fetchTodos(): Observable<todosResponse> {
     return this.http.get<todosResponse>('https://dummyjson.com/todos');
+  }
+
+  postToDo(todo: string): Observable<addTodosResponse> {
+    return this.http.post<addTodosResponse>('https://dummyjson.com/todos/add', {
+      todo: todo,
+      completed: false,
+      userId: 1,
+    });
   }
 
   loadTodos() {

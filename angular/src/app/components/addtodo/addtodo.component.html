@@ -1,36 +1,27 @@
-<div
-  class="border dark:border-brown rounded-lg max-w-2xl mx-auto shadow-search dark:shadow-md dark:shadow-brown w-full p-3 grid relative transition-all duration-300 mb-4"
->
-  @if(isOpen){
-  <input
-    name="title"
-    type="text"
-    (blur)="onBlur()"
-    [(ngModel)]="title"
-    placeholder="Title of note"
-    class="outline-none p-2 w-full border-b dark:border-brown bg-transparent"
-  />
-  }
-
+<div style="display: flex">
   <div
-    #contentInput
-    contenteditable
-    (blur)="onBlur()"
-    (focus)="onFocus()"
-    (input)="setContent($event)"
-    class="outline-none z-10"
-    [class.p-0]="!isOpen"
-    [class.p-2]="isOpen"
-  ></div>
-
-  @if(content==''){
-  <div
-    class="absolute z-0 text-gray-400"
-    [class.p-3]="!isOpen"
-    [class.p-5]="isOpen"
-    [class.top-11]="isOpen"
+    class="border dark:border-brown rounded-lg max-w-2xl mx-auto shadow-search dark:shadow-md dark:shadow-brown w-full p-3 grid relative transition-all duration-300 mb-4"
   >
-    Add a new note...
+    <input
+      name="title"
+      type="text"
+      [(ngModel)]="title"
+      placeholder="Title of note"
+      class="outline-none p-2 w-full border-b dark:border-brown bg-transparent"
+    />
+
+    <input
+      [(ngModel)]="content"
+      class="outline-none z-10 p-2"
+      placeholder="Add a new note..."
+    />
   </div>
-  }
+  <button
+    [disabled]="!content || !title"
+    (click)="addToDo()"
+    class="btn"
+    style="height: 50px; min-width: 101.95px; margin-left: 5px"
+  >
+    Add
+  </button>
 </div>

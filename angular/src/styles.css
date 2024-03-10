@@ -31,11 +31,15 @@
   );
   color: white;
 }
-.theme{
+.theme {
   @apply dark:bg-background-dark bg-background dark:text-foreground-dark text-foreground;
 }
 .btn {
   @apply rounded px-4 py-1 border-2 border-primary hover:bg-primary hover:text-light transition-all duration-150;
+}
+
+.btn:disabled {
+  @apply opacity-50 hover:bg-white hover:text-black;
 }
 .input {
   @apply border-2 outline-none rounded p-2 bg-gray-100 focus:bg-light focus:border-primary;

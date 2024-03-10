@@ -8,12 +8,10 @@
   </h2>
   <button (click)="resetFilter()" class="btn">Show all</button>
 </div>
-}
-
-@if (filteredTodos.length == 0) {
+} @if (filteredTodos.length == 0) {
 <div class="p-3 text-center rounded-md font-bold text-xl py-4">
   @if(searchParams){
-  <p>No todo found in the search result !!</p>
+  <p>No todos found</p>
   <button (click)="resetFilter()" class="btn mt-4">Clear Search</button>
   }
 </div>
@@ -21,27 +19,48 @@
 
 <div class="flex flex-wrap gap-4 justify-center">
   @for (todo of (searchParams?filteredTodos:todos); track todo.id) {
-  <div [ngClass]="{'w-[99%] md:w-[45%] lg:w-[23%]': viewType == 'grid','w-full':viewType == 'list'}">
-    <todo-card [isSelcted]="todo.id == selectedTodo?.id" (click)="openModel(todo)" [todo]="todo"></todo-card>
+  <div
+    [ngClass]="{
+      'w-[99%] md:w-[45%] lg:w-[23%]': viewType == 'grid',
+      'w-full': viewType == 'list'
+    }"
+  >
+    <todo-card
+      [isSelcted]="todo.id == selectedTodo?.id"
+      (click)="openModel(todo)"
+      [todo]="todo"
+    ></todo-card>
   </div>
-  } @empty {
-  @if(!searchParams){
+  } @empty { @if(!searchParams){
   <div class="w-full">
-    <h1 class="text-2xl font-semibold text-center w-full">No todo Found !!</h1>
+    <h1 class="text-2xl font-semibold text-center w-full">No todos found</h1>
   </div>
-  }
-  }
+  } }
 </div>
 
 <model-cmp [open]="showModel" (closeModal)="closeModel()">
   @if(selectedTodo){
-  <div class="relative rounded-lg flex flex-col justify-between flex-[3] min-w-80">
+  <div
+    class="relative rounded-lg flex flex-col justify-between flex-[3] min-w-80"
+  >
     <div class="p-3">
-      <input #titleInput type="text" [defaultValue]="selectedTodo.title" (blur)="editTitle()"
-        class="text-xl font-semibold mb-4 outline-none w-full bg-transparent" />
-      <div #contentInput contenteditable (blur)="editContent()" class="outline-none z-10"></div>
+      <input
+        #titleInput
+        type="text"
+        [defaultValue]="selectedTodo.title"
+        (blur)="editTitle()"
+        class="text-xl font-semibold mb-4 outline-none w-full bg-transparent"
+      />
+      <div
+        #contentInput
+        contenteditable
+        (blur)="editContent()"
+        class="outline-none z-10"
+      ></div>
     </div>
-    <div class="theme p-3 box-border border-t dark:border-brown sticky bottom-0 w-full flex justify-between">
+    <div
+      class="theme p-3 box-border border-t dark:border-brown sticky bottom-0 w-full flex justify-between"
+    >
       <div class="text-red-500 cursor-pointer w-fit">
         <i class="fa-solid fa-trash"></i>
       </div>

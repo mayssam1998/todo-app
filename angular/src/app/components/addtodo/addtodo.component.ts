@@ -21,10 +21,13 @@ export class AddtodoComponent {
     this.isOpen = true;
   }
 
-  onBlur(): void {
+  addToDo(): void {
     if (this.title && this.content) {
       this.isOpen = false;
-      this.todoService.addTodo({ title: this.title, content: this.content });
+      const todo = { title: this.title, content: this.content };
+      this.todoService.postToDo(todo.content).subscribe(() => {
+        this.todoService.addTodo(todo);
+      });
       (this.title = ''), (this.content = '');
       if (this.contentInput) {
         this.contentInput.nativeElement.innerText = '';
