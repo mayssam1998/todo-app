@@ -4,20 +4,7 @@ import { TodosService } from '../../services/todos.service';
 import userEvent from '@testing-library/user-event';
 import { HttpClientModule } from '@angular/common/http';
 import { of } from 'rxjs';
-
 describe('AddToDoComponent', () => {
-  /*
-    getBy...: Returns the matching node for a query, and throw a descriptive error if no elements match or if more than one match is found (use getAllBy instead if more than one element is expected).
-queryBy...: Returns the matching node for a query, and return null if no elements match. This is useful for asserting an element that is not present. Throws an error if more than one match is found (use queryAllBy instead if this is OK).
-findBy...: Returns a Promise which resolves when an element is found which matches the given query. The promise is rejected if no element is found or if more than one element is found after a default timeout of 1000ms. If you need to find more than one element, use findAllBy
- */
-
-  /*
-   * Arrange
-   * Act
-   * Assert
-   */
-
   const todosService = jasmine.createSpyObj('TodosService', [
     'postToDo',
     'addTodo',
@@ -82,7 +69,7 @@ findBy...: Returns a Promise which resolves when an element is found which match
   it('should call the addtodo function in the todos service and emit an event on add to do clicked', async () => {
     const emit = jasmine.createSpy();
 
-    const renderResult = await render(AddtodoComponent, {
+    await render(AddtodoComponent, {
       imports: [HttpClientModule],
       componentProperties: {
         onTodoAdded: {
