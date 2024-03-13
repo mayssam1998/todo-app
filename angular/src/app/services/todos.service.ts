@@ -97,6 +97,7 @@ export class TodosService {
   }
 
   addTodo(todo: TodoProp) {
+    console.log('in add todo !!!!!');
     const todoToAdd = { ...todo, id: generateId() };
     const prevTodos = [...(this.todoSubject.value || [])];
     prevTodos.push(todoToAdd);
