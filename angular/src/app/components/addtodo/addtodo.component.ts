@@ -2,7 +2,6 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TodosService } from '../../services/todos.service';
-import { EventEmitter } from 'stream';
 import { Output, EventEmitter } from '@angular/core';
 
 @Component({
