@@ -104,10 +104,7 @@ export class TodosService {
   }
 
   deleteTodo = (id: string) => {
-    const updatedTodos = [...(this.todoSubject.value || [])].filter(
-      (todo) => todo.id !== id
-    );
-    this.setTodos(updatedTodos);
+    return this.http.delete(`https://dummyjson.com/todos/${id}`);
   };
 
   editTodos = (toDo: TodosProps) => {

@@ -12,10 +12,11 @@ export class TodoCardComponent {
   @Input() todo: TodosProps | undefined;
   @Input() isSelcted: boolean = false;
   @Output() click = new EventEmitter<void>();
+  @Output() removeListItem = new EventEmitter<string>();
   todosService = inject(TodosService);
 
   deleteTodo(id: string) {
-    this.todosService.deleteTodo(id);
+    this.removeListItem.emit(id);
   }
 
   onClick() {
