@@ -8,6 +8,7 @@ import { NgIf } from '@angular/common';
   imports: [NgIf],
   templateUrl: './todo-card.component.html',
 })
+
 export class TodoCardComponent {
   @Input() todo: TodosProps | undefined;
   @Input() isSelcted: boolean = false;
@@ -16,6 +17,15 @@ export class TodoCardComponent {
 
   deleteTodo(id: string) {
     this.todosService.deleteTodo(id);
+  }
+
+  onCheckboxClick(event : any){
+    console.log(event);
+    if(this.todo){
+      this.todosService.markTodoAsComplete(this.todo.id, event.target.checked);
+    }
+    event.stopPropagation();
+
   }
 
   onClick() {
