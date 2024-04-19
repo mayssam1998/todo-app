@@ -13,7 +13,11 @@ export class TodoCardComponent {
   @Input() isSelcted: boolean = false;
   @Output() click = new EventEmitter<void>();
   @Output() removeListItem = new EventEmitter<string>();
+  isSelected=false;
   todosService = inject(TodosService);
+
+  constructor(private todoService : TodosService) {
+  }
 
   deleteTodo(id: string) {
     this.removeListItem.emit(id);
@@ -21,5 +25,12 @@ export class TodoCardComponent {
 
   onClick() {
     this.click.emit();
+  }
+
+  onCheck(todo: TodosProps, event: any) {
+    this.isSelected = true;
+    event.stopPropagation();
+    this.todosService.checkTodo(todo).subscribe();
+    this.deleteTodo(todo.id);
   }
 }

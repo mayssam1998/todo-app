@@ -114,4 +114,10 @@ export class TodosService {
     updatedTodos.push(toDo);
     this.setTodos(updatedTodos);
   };
+
+  checkTodo = (toDo: TodosProps) => {
+    console.log("service reached", toDo)
+    return this.http.put(`https://dummyjson.com/todos/${toDo.id}`, {})
+  }
 }
+

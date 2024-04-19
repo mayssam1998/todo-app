@@ -5,6 +5,7 @@
   [class.opacity-0]="isSelcted"
   class="border relative p-3 rounded-lg cursor-pointer dark:border-brown hover:shadow-md dark:shadow-brown flex flex-col justify-start transition-all duration-200"
 >
+  <input type="checkbox" (click)="onCheck(todo, $event)">
   <div>
     <p class="text-xl font-semibold mb-4">{{ todo.title }}</p>
     <p class="line-clamp-6 mb-6">{{ todo.content }}</p>
