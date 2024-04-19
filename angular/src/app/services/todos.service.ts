@@ -1,8 +1,9 @@
-import { Injectable, signal } from '@angular/core';
-import { LocalStorageService } from './localstorage.service';
-import { generateId } from '../../utils/helper';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import {Injectable, signal} from '@angular/core';
+import {LocalStorageService} from './localstorage.service';
+import {generateId} from '../../utils/helper';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {ICheckboxDeletedResponse} from "../components/model/ICheckboxDeletedResponse";
 
 export type TodosProps = {
   id: string;
@@ -37,6 +38,7 @@ export type fetchedTodo = {
   todo: string;
   userId: number;
 };
+
 @Injectable({
   providedIn: 'root',
 })
@@ -97,7 +99,7 @@ export class TodosService {
   }
 
   addTodo(todo: TodoProp) {
-    const todoToAdd = { ...todo, id: generateId() };
+    const todoToAdd = {...todo, id: generateId()};
     const prevTodos = [...(this.todoSubject.value || [])];
     prevTodos.push(todoToAdd);
     this.setTodos(prevTodos);
@@ -114,4 +116,8 @@ export class TodosService {
     updatedTodos.push(toDo);
     this.setTodos(updatedTodos);
   };
+
+  markTodoAsCompleted(id: string): Observable<ICheckboxDeletedResponse> {
+    return this.http.put<ICheckboxDeletedResponse>(`https://dummyjson.com/todos/${id}`, {});
+  }
 }

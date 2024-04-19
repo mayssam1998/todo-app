@@ -57,6 +57,7 @@ export class TodoslistComponent {
   }
 
   openModel(todo: TodosProps) {
+    console.log(todo);
     this.showModel = true;
     this.selectedTodo = todo;
     this.contentInput.nativeElement.innerText = todo.content;

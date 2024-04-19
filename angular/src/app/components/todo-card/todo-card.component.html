@@ -1,11 +1,16 @@
 @if(todo) {
 
 <li
-  (click)="onClick()"
-  [class.opacity-0]="isSelcted"
+  (click)="onClick($event)"
+  [class.opacity-0]="isSelected"
   class="border relative p-3 rounded-lg cursor-pointer dark:border-brown hover:shadow-md dark:shadow-brown flex flex-col justify-start transition-all duration-200"
+
 >
-  <div>
+  <div style="display: flex;">
+    <ng-container>
+      <label>Done</label>
+      <input (click)="checkboxClicked($event)" type="checkbox" >
+    </ng-container>
     <p class="text-xl font-semibold mb-4">{{ todo.title }}</p>
     <p class="line-clamp-6 mb-6">{{ todo.content }}</p>
   </div>

@@ -1,6 +1,6 @@
-import { Component, Input, Output, inject, EventEmitter } from '@angular/core';
-import { TodosProps, TodosService } from '../../services/todos.service';
-import { NgIf } from '@angular/common';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {TodosProps, TodosService} from '../../services/todos.service';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'todo-card',
@@ -10,16 +10,42 @@ import { NgIf } from '@angular/common';
 })
 export class TodoCardComponent {
   @Input() todo: TodosProps | undefined;
-  @Input() isSelcted: boolean = false;
+  @Input() isSelected: boolean = false;
   @Output() click = new EventEmitter<void>();
   @Output() removeListItem = new EventEmitter<string>();
-  todosService = inject(TodosService);
+
+  // todosService = inject(TodosService);
+  protected readonly event = event;
+
+  constructor(private todoService: TodosService) {
+  }
 
   deleteTodo(id: string) {
     this.removeListItem.emit(id);
   }
 
-  onClick() {
+  onClick($event: any) {
+    $event.stopPropagation();
     this.click.emit();
+  }
+
+  checkboxClicked($event: any) {
+    console.log("checkbox clicked", $event)
+    if(this.todo == undefined){
+      console.error("todo is undefined")
+      return;
+    }
+    this.todoService.markTodoAsCompleted(this.todo!.id!).subscribe({
+      next: (value)=>{
+
+      },
+      error: err => {
+
+      },
+      complete: ()=>{
+        this.deleteTodo(this.todo!.id!);
+      }
+    });
+    $event.stopPropagation();
   }
 }
