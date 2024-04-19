@@ -103,6 +103,12 @@ export class TodosService {
     this.setTodos(prevTodos);
   }
 
+  markTodoAsComplete(id: string, checked : boolean): Observable<any> {
+    return this.http.put<addTodosResponse>('https://dummyjson.com/todos/' +id, {
+      completed : checked
+    });
+  }
+
   deleteTodo = (id: string) => {
     const updatedTodos = [...(this.todoSubject.value || [])].filter(
       (todo) => todo.id !== id
