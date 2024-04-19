@@ -70,6 +70,17 @@ export class TodoslistComponent {
       );
       this.todoservice.setTodos(updatedTodos);
     });
+    this.closeModel()
+  }
+
+  markAsDone(todoId: string) {
+    if (!todoId) return;
+    this.todoservice.markTodoAsDone(todoId).subscribe(() => {
+      const updatedTodos = [...(this.todos || [])].filter(
+        (todo) => todo.id !== todoId
+      );
+      this.todoservice.setTodos(updatedTodos);
+    })
   }
 
   closeModel() {

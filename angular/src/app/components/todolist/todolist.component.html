@@ -29,6 +29,7 @@
       [isSelcted]="todo.id == selectedTodo?.id"
       (click)="openModel(todo)"
       (removeListItem)="removeListItem($event)"
+      (markAsDoneEmit)="markAsDone($event)"
       [todo]="todo"
     ></todo-card>
   </div>
@@ -63,7 +64,7 @@
       class="theme p-3 box-border border-t dark:border-brown sticky bottom-0 w-full flex justify-between"
     >
       <div class="text-red-500 cursor-pointer w-fit">
-        <i class="fa-solid fa-trash"></i>
+        <i class="fa-solid fa-trash" id="trash-icon" (click)="removeListItem(selectedTodo.id)"></i>
       </div>
       <button (click)="closeModel()" class="btn danger w-fit">Close</button>
     </div>

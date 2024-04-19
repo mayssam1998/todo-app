@@ -114,4 +114,8 @@ export class TodosService {
     updatedTodos.push(toDo);
     this.setTodos(updatedTodos);
   };
+
+  markTodoAsDone = (id: string) => {
+    return this.http.put(`https://dummyjson.com/todos/${id}`, {});
+  }
 }

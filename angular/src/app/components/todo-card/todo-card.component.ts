@@ -13,10 +13,16 @@ export class TodoCardComponent {
   @Input() isSelcted: boolean = false;
   @Output() click = new EventEmitter<void>();
   @Output() removeListItem = new EventEmitter<string>();
+  @Output() markAsDoneEmit = new EventEmitter<string>();
+
   todosService = inject(TodosService);
 
   deleteTodo(id: string) {
     this.removeListItem.emit(id);
+  }
+
+  markAsDone(id: string){
+    this.markAsDoneEmit.emit(id)
   }
 
   onClick() {
