@@ -9,12 +9,12 @@
     <p class="text-xl font-semibold mb-4">{{ todo.title }}</p>
     <p class="line-clamp-6 mb-6">{{ todo.content }}</p>
   </div>
-  <div
+  <button
     (click)="deleteTodo(todo.id)"
     class="flex items-center gap-4 absolute bottom-2 w-fit right-3"
   >
     <i class="fa-solid fa-trash text-red-600"></i>
-  </div>
+  </button>
 </li>
 
 }
