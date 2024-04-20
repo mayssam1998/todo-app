@@ -1,14 +1,19 @@
-describe('My search test', () => {
-  it('updates the todo list', () => {
-    cy.intercept('GET', '**/todos',{fixture: 'todos/getTodos.json'}).as('getTodos');
-    cy.visit('/')
-    cy.findAllByRole('listitem').should('have.length.at.least', 10);
-    const search = cy.findByPlaceholderText(/search todo/i);
-    cy.findByText(/showing result of/i).should('not.exist');
-    cy.findByText(/show all/i).should('not.exist');
-    search.type('take');
-    cy.findByText(/showing result of/i).should('exist');
-    cy.findAllByRole('listitem').should('have.length.at.least', 4);
-    cy.findByText(/show all/i).should('exist');
-  })
-})
+describe("Testing Search Bar", ()=> {
+        it("what it does", () => {
+            cy.visit('/');
+            const search = cy.findAllByPlaceholderText(/Search Todo ../i);
+
+            cy.findByText(/Showing result of/i).should('not.exist');
+            cy.findByRole('button', {name: /Show all'/i}).should('not.exist')
+            cy.url().should('not.include', 'search=take');
+
+            search.type('take')
+
+            cy.findByText(/Showing result of/i).should('exist');
+            cy.findByRole('button', {name: /Show all/i}).should('exist')
+            cy.url().should('include', 'search=take');
+
+        })
+    }
+)
+   

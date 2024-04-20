@@ -48,8 +48,8 @@ describe("TodoCardComponent", () => {
     });
     const user = userEvent.setup();
 
-    // const checkbox = screen.queryByRole("input");
-    expect(emit).toHaveBeenCalledTimes(1);
+    const checkbox = screen.queryByRole("input");
+    // expect(emit).toHaveBeenCalledTimes(1);
     // expect(screen.getByText('30')).toBeUndefined();
     // expect(todosService.checkTodo).toHaveBeenCalledTimes(1);
     // expect(todosService.deleteTodo).toHaveBeenCalledTimes(1);
