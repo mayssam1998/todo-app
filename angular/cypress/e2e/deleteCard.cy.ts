@@ -1,4 +1,4 @@
-describe("Delete Note", () => {
+describe("Delete Card", () => {
     it("deletes a todo card from list", () => {
         cy.visit('/')
 
