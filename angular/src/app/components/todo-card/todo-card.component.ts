@@ -19,7 +19,8 @@ export class TodoCardComponent {
   constructor(private todoService : TodosService) {
   }
 
-  deleteTodo(id: string) {
+  deleteTodo(id: string, event: any) {
+    event.stopPropagation();
     this.removeListItem.emit(id);
   }
 
@@ -31,6 +32,6 @@ export class TodoCardComponent {
     this.isSelected = true;
     event.stopPropagation();
     this.todosService.checkTodo(todo).subscribe();
-    this.deleteTodo(todo.id);
+    this.deleteTodo(todo.id, event);
   }
 }

@@ -3,8 +3,8 @@ describe("Delete Note", () => {
         cy.visit('/')
 
         const card = cy.findAllByText('30');
-        const deleteIcon = card.findByRole("button");
-        console.log(deleteIcon);
-
+        let deleteIcon = card.get("#delete-icon")
+        deleteIcon.click()
+        cy.findAllByText('30').should('not.exist');
     })
 })

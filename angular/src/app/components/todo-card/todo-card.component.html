@@ -11,8 +11,9 @@
     <p class="line-clamp-6 mb-6">{{ todo.content }}</p>
   </div>
   <button
-    (click)="deleteTodo(todo.id)"
+    (click)="deleteTodo(todo.id, $event)"
     class="flex items-center gap-4 absolute bottom-2 w-fit right-3"
+    id="delete-icon"
   >
     <i class="fa-solid fa-trash text-red-600"></i>
   </button>
