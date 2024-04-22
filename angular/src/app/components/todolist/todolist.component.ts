@@ -57,14 +57,24 @@ export class TodoslistComponent {
   }
 
   openModel(todo: TodosProps) {
-    this.showModel = true;
+   /* this.showModel = true;
     this.selectedTodo = todo;
-    this.contentInput.nativeElement.innerText = todo.content;
+    this.contentInput.nativeElement.innerText = todo.content;*/
   }
 
   removeListItem(todoId?: string) {
     if (!todoId) return;
     this.todoservice.deleteTodo(todoId).subscribe(() => {
+      const updatedTodos = [...(this.todos || [])].filter(
+        (todo) => todo.id !== todoId
+      );
+      this.todoservice.setTodos(updatedTodos);
+    });
+  }
+
+  markItemAsCompleted(todoId?: string) {
+    if (!todoId) return;
+    this.todoservice.setTodoAsCompleted(todoId).subscribe(() => {
       const updatedTodos = [...(this.todos || [])].filter(
         (todo) => todo.id !== todoId
       );

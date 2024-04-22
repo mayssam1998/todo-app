@@ -4,17 +4,45 @@
   (click)="onClick()"
   [class.opacity-0]="isSelcted"
   class="border relative p-3 rounded-lg cursor-pointer dark:border-brown hover:shadow-md dark:shadow-brown flex flex-col justify-start transition-all duration-200"
+  data-testid="todo-list-item"
 >
   <div>
     <p class="text-xl font-semibold mb-4">{{ todo.title }}</p>
     <p class="line-clamp-6 mb-6">{{ todo.content }}</p>
   </div>
+  <div>
+    <input
+      id="markAsCompleted"
+      type="checkbox"
+      class="outline-none p-2 w-full border-b dark:border-brown bg-transparent"
+      style="width: auto; margin-right: 5px"
+      [(ngModel)]="isChecked"
+      (change)="markTaskAsCompleted($event)"
+      data-testid="mark-as-completed-checkbox"
+    />
+    <label for="markAsCompleted">Mark as completed</label>
+  </div>
+
+<div *ngIf="!deleteMode">
   <button
-    (click)="deleteTodo(todo.id)"
-    class="flex items-center gap-4 absolute bottom-2 w-fit right-3"
+          (click)="changeDeleteMode()"
+          class="flex items-center gap-4 absolute bottom-2 w-fit right-3" data-testid="delete-icon-button"
   >
     <i class="fa-solid fa-trash text-red-600"></i>
   </button>
+</div>
+
+
+  <div *ngIf="deleteMode" class="flex gap-4 justify-end mr-3 mt-3">
+    <button
+      (click)="deleteTodo(todo.id)"
+      class="btn w-fit"
+    >Confirm</button>
+    <button
+      (click)="changeDeleteMode()"
+      class="btn w-fit"
+    >Cancel</button>
+  </div>
 </li>
 
 }

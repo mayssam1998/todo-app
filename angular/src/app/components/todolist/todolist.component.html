@@ -29,6 +29,7 @@
       [isSelcted]="todo.id == selectedTodo?.id"
       (click)="openModel(todo)"
       (removeListItem)="removeListItem($event)"
+      (markAsCompleted)="markItemAsCompleted($event)"
       [todo]="todo"
     ></todo-card>
   </div>

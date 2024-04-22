@@ -107,6 +107,10 @@ export class TodosService {
     return this.http.delete(`https://dummyjson.com/todos/${id}`);
   };
 
+  setTodoAsCompleted = (id: string) => {
+    return this.http.put(`https://dummyjson.com/todos/${id}`, null);
+  };
+
   editTodos = (toDo: TodosProps) => {
     const updatedTodos = [...(this.todoSubject.value || [])].filter(
       (todo) => todo.id !== toDo.id
